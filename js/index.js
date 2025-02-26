@@ -1,19 +1,32 @@
-console.log(
-  "%c" +
-    " __      __  ______   __  __   ______     " +
-    "\n" +
-    "/\\ \\  __/\\ \\ /\\__  _\\ /\\ \\ /\\ \\ /\\__  _\\    " +
-    "\n" +
-    "\\ \\ \\/\\ \\ \\ \\/_\\/\\ \\/ \\ \\ \\/'/'\\/ _/\\ \\/    " +
-    "\n" +
-    " \\ \\ \\ \\ \\ \\ \\ \\ \\ \\  \\ \\ , <    \\ \\ \\    " +
-    "\n" +
-    "  \\ \\ \\_/ \\_\\ \\ \\_\\ \\__\\ \\ \\\\`\\   \\_\\ \\__ " +
-    "\n" +
-    "   \\ `\\___x___/ /\\_____\\\\ \\_\\ \\_\\ /\\_____\\ " +
-    "\n" +
-    "    '/__//__/  /_____/ \\/_/\\/_/ /_____/",
-  "color: #d81b60; font-size: 16px; font-weight: bold;"
-);
+document.addEventListener("DOMContentLoaded", () => {
+  const commentInput = document.getElementById("commentInput");
+  const commentList = document.getElementById("commentList");
+  const submitBtn = document.querySelector(".submit_btn");
+  const cancelBtn = document.querySelector(".cancel_btn");
 
-console.log("알맞은 스크립트를 작성하세요");
+  submitBtn.addEventListener("click", () => {
+    const commentText = commentInput.value.trim();
+    if (commentText === "") return;
+
+    // 댓글 생성
+    const commentItem = document.createElement("li");
+    commentItem.classList.add("comment_item");
+    commentItem.innerHTML = `
+    <div class="comment_container">
+      <div class="comment_author">
+        <img src="./images/comment-author-icon.png" alt="사용자 프로필 이미지" />
+        <span>방문자</span>
+      </div>
+      <div class="comment_content">${commentText}</div>
+    </div>
+    `;
+
+    commentList.appendChild(commentItem);
+    commentInput.value = "";
+  });
+
+  // 취소 버튼
+  cancelBtn.addEventListener("click", () => {
+    commentInput.value = "";
+  });
+});
